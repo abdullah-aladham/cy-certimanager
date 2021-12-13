@@ -52,4 +52,11 @@ $response = $kernel->handle(
     $request = Request::capture()
 )->send();
 
+try{
+    //echo "i am working";
+    DB::connection()->getPdo();
+}catch(Error $err){
+    die("no database is connected". $err);
+}
 $kernel->terminate($request, $response);
+?>
