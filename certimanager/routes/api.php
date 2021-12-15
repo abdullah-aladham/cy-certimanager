@@ -17,9 +17,9 @@ use App\Http\Controllers\CertificateController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/getCertificates',[CertificateController::class,'getAllCertificates']);
+/*Route::get('/getCertificates',[CertificateController::class,'getAllCertificates']);
 Route::get('/get-expired',[CertificateController::class,'fetch_expired_certificates']);
-
+*/
 /*@AUTHOR:ABDULLAH ALADHAM
 LINKEDIN:https://www.linkedin.com/in/abdullah-aladham/
 freelancer:https://www.freelancer.com/u/Abdullahadham

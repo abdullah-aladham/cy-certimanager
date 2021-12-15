@@ -11,6 +11,11 @@
         border: 1px solid black;
         border-collapse: collapse;
     }
+    th,td{
+        padding:25px;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+    }
 </style>
 
 </head>
@@ -39,9 +44,7 @@
 
         </tr>
         @endforeach
-        <tr>
-            <td colspan="4">{{$certificate->links()}}</td>
-        </tr>
+       
     </table>
 </body>
 </html>

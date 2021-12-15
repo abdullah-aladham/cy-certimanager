@@ -21,7 +21,7 @@ try:
     #establishing a connection to mysql
     conn= mysql.connector.connect(host="localhost",database="cy_db",user="root",password="HelloWorld-1516!")
     #defining sql query for insertion 
-    query="""INSERT INTO certificates (Issuer_Name,Common_Name,Logged_At,Not_Before,Not_After,Matching_Identities) Values ('abdulla','abood',02/01/2016,01/01/2017,02/01/2018,'abd')"""
+    query="""INSERT INTO certificates (Issuer_Name,Common_Name,Logged_At,Not_Before,Not_After,Matching_Identities,serial_number) Values ('abdulla','abood','2021-02-15T16:50:19.733','2020-02-19T10:59:40','2021-02-16T09:27:10','abd','wip659788945')"""
     cursor = conn.cursor()
     cursor.execute(query)
     print(cursor.rowcount,"Record inserted successfully to certificates table")

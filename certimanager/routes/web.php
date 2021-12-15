@@ -19,6 +19,6 @@ Route::get('/', function () {
 });
 Route::get('display-certificates','App\Http\Controllers\CertificateController@getAllCertificates');
 Route::get('display-expired','App\Http\Controllers\CertificateController@fetch_expired_certificates');
-Route::get('display-nearexp','App\Http\Controllers\CertificateController@near_Expire_Certificates');
+Route::get('display-new-certificates','App\Http\Controllers\CertificateController@Fetch_New_Certificates');
 
 
