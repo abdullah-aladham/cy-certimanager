@@ -1,31 +1,29 @@
-#from bs4 import BeautifulSoup
-import json
+#import json
 
 import requests
 import  mysql.connector
 #getting data through http get request
-#req=requests.get('https://crt.sh/?q=islamicbank.ps&output=json')
-#resp=req.json()
-#result=json.loads(req)
-#print(resp)
-#soup=BeautifulSoup(req,'html5lib')
-#datafound =soup.find('table',attrs={'tr'})
-#purgedata= datafound.find('td')
-#print(datafound)
-#for i in req:
- #   commonName=req['Common_name']
-  #  print(commonName)
+req=requests.get('https://crt.sh/?q=islamicbank.ps&output=json')
+resp=req.json()
+
 
 try:
     print("hello")
     #establishing a connection to mysql
     conn= mysql.connector.connect(host="localhost",database="cy_db",user="root",password="HelloWorld-1516!")
-    #defining sql query for insertion 
-    query="""INSERT INTO certificates (Issuer_Name,Common_Name,Logged_At,Not_Before,Not_After,Matching_Identities,serial_number) Values ('abdulla','abood','2021-02-15T16:50:19.733','2020-02-19T10:59:40','2021-02-16T09:27:10','abd','wip659788945')"""
-    cursor = conn.cursor()
-    cursor.execute(query)
-    print(cursor.rowcount,"Record inserted successfully to certificates table")
-    conn.commit()
+    #defining sql query  loop of insertion 
+    for item in resp:
+     query="INSERT INTO certificates (Issuer_Name,Common_Name,Logged_At,Not_Before,Not_After,Matching_Identities,serial_number) Values ('" + item['issuer_name']+"','" + item['common_name']+ "','" + item['entry_timestamp']+ "','" + item['not_before']+ "','" + item['not_after']+"','" +item['name_value']+ "','" +item['serial_number']+"');"
+
+     cursor = conn.cursor()
+     cursor.execute(query)
+     conn.commit()
+
+     print(cursor.rowcount,"Record inserted successfully to certificates table")
+
+
+   # for item in result:
+
     cursor.close()
 
 except mysql.connector.Error as error:
@@ -34,3 +32,8 @@ finally:
     if conn.is_connected(): 
         conn.close()
         print("Mysql connection is closed")    
+
+
+
+        #MADE with love by Abdullah Aladham
+        #LINKEDIN:

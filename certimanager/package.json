@@ -8,8 +8,6 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production"
-     
-
     },
     "devDependencies": {
         "@babel/preset-react": "^7.13.13",
@@ -24,5 +22,10 @@
         "resolve-url-loader": "^4.0.0",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1"
+    },
+    "dependencies": {
+        "@material-ui/core": "^4.12.3",
+        "@material-ui/icons": "^4.11.2",
+        "chart.js": "^3.6.2"
     }
 }
