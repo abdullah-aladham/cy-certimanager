@@ -12,9 +12,4 @@
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-//require('./components/Example');
-import { ReactDOM } from 'react-dom';
-import Example from './components/Example';
-if (document.getElementById('example')) {
-    ReactDOM.render(<Example />, document.getElementById('example'));
-}
+require('./components/Example');
