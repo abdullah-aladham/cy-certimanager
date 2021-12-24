@@ -18,12 +18,12 @@
         <style>
            
         </style>
-        <link rel="stylesheet" href="./css/app.css">
+        <!--<link rel="stylesheet" href="./css/app.css">-->
     </head>
     <body class="antialiased">
      
         <div id="Index"></div>
-        <script src="./js/app.js"></script>
+    <!--<script src="../js/app.js"></script>-->
       
     </body>
    

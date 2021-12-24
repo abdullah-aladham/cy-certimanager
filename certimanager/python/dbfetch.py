@@ -13,8 +13,8 @@ try:
     conn= mysql.connector.connect(host="localhost",database="cy_db",user="root",password="HelloWorld-1516!")
     #defining sql query  loop of insertion 
     for item in resp:
-     query="INSERT INTO certificates (Issuer_Name,Common_Name,Logged_At,Not_Before,Not_After,Matching_Identities,serial_number) Values ('" + item['issuer_name']+"','" + item['common_name']+ "','" + item['entry_timestamp']+ "','" + item['not_before']+ "','" + item['not_after']+"','" +item['name_value']+ "','" +item['serial_number']+"');"
-
+     query="INSERT INTO certificates (Issuer_Name,Common_Name,Logged_At,Not_Before,Not_After,Matching_Identities,serial_number,Issuer_id) Values ('" + item['issuer_name']+"','"+ item['common_name']+ "','" + item['entry_timestamp']+ "','" + item['not_before']+ "','" + item['not_after']+"','" +item['name_value']+ "','" +item['serial_number']+"',"+str(item['issuer_ca_id'])+");"
+   
      cursor = conn.cursor()
      cursor.execute(query)
      conn.commit()

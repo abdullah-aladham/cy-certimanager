@@ -12,7 +12,7 @@
         border-collapse: collapse;
     }
     th,td{
-        padding:25px;
+        padding:20px;
         border-right: 1px solid black;
         border-bottom: 1px solid black;
     }
@@ -29,6 +29,8 @@
             <th>Common_Name</th>
             <th>Matching_Identities</th>
             <th>Issuer_Name</th>
+            <th>serial_number</th>
+            <th>Issuer_id</th>
         </tr>
         @foreach($certificate as $row)
         <tr>
@@ -39,6 +41,9 @@
             <td>{{$row->Common_Name}}</td>
             <td>{{$row->Matching_Identities}}</td>
             <td>{{$row->Issuer_Name}}</td>
+            <td>{{$row->serial_number}}</td>
+            <td>{{$row->Issuer_id}}</td>
+
 
 
 

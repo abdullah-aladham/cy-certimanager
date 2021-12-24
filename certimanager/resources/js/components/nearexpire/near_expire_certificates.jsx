@@ -1,18 +1,37 @@
+//import { red } from '@material-ui/core/colors';
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import {Doughnut} from'react-chartjs-2';
 
-class near_expire_certificates extends Component {
+
+class Near_expire_certificates extends Component {
 
  
 
     render() {
         return (
-            <div>
+            
+                <Doughnut
+                width={100}
+                height={500}
+              options={{
+                responsive: true,
+                maintainAspectRatio: true,
+              }}
+                
 
-            </div>
+                />
+            
         );
     }
 }
 
 
-export default near_expire_certificates;
+export default Near_expire_certificates;
+/*Made With Love by Abdullah Aladham
+
+Linkedin:https://www.linkedin.com/in/abdullah-aladham/
+
+
+
+
+*/
