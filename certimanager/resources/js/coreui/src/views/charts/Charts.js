@@ -19,13 +19,13 @@ const Charts = () => {
       setNumber(number)
       console.log(number)
     })
-  }, [])
-    axios.get('http://localhost/cystack/certimanager/public/get-all-num').then((res) => {
-      const number = res.data
-      setNumber(number)
-      console.log(number)
-    })
-  }, [])
+  }, []);
+  //   axios.get('http://localhost/cystack/certimanager/public/get-all-num').then((res) => {
+  //     const number = res.data
+  //     setNumber(number)
+  //     console.log(number)
+  //   })
+  // }, []);
   const random = () => Math.round(Math.random() * 100)
 
   return (
