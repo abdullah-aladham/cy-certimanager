@@ -11,7 +11,9 @@ use Carbon\Carbon;
 class CertificateController extends Controller
 {
     //
-
+  public function display(){
+    return view('display');
+  }
   public function  fetch_expired_certificates()
   {
     $certificate=Certificates::get()
@@ -32,20 +34,10 @@ class CertificateController extends Controller
   }
   public function getAllCertificates()
   {
-    $certificate=Certificates::get();
-    return response()
-    ->json([
-      'id' => 'Abigail', 
-      'Logged_At' => 'CA',
-      'Common_Name'=>'',
-      'Matching_Identities'=>'',
-      'Issuer_Name'=>'',
-      'serial_number'=>'',
-      'Not_Before'=>'',
-      'Not_After'=>'',
-      'Issuer_id'=>''
-      ])
-    ->withCallback($certificate->input('callback'));
+    $certificate=Certificates::get()->json();
+    return $certificate;
+
+   
   }
 
   public function getCertificatseNum(){
