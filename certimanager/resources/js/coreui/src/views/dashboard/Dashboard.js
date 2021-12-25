@@ -1,4 +1,4 @@
-import React, { lazy } from 'react'
+import React, { lazy, useState, useEffect } from 'react'
 
 import {
   CAvatar,
@@ -44,7 +44,7 @@ import {
   cilUser,
   cilUserFemale,
 } from '@coreui/icons'
-
+import axios from 'axios'
 import avatar1 from 'src/assets/images/avatars/1.jpg'
 import avatar2 from 'src/assets/images/avatars/2.jpg'
 import avatar3 from 'src/assets/images/avatars/3.jpg'
@@ -57,16 +57,22 @@ const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
 const Dashboard = () => {
   const [number, setNumber] = useState([])
+  const[certificate,setCertificate]=useState([])
   useEffect(() => {
-    let new_num='http://localhost/cystack/certimanager/public/get-new-num';
-    let expired_num='http://localhost/cystack/certimanager/public/get-expired-num';
-    let all_cert_num='http://localhost/cystack/certimanager/public/get-all-num';
-    axios.get('http://localhost/cystack/certimanager/public/get-all-num').then((res) => {
+    let new_num = 'http://localhost/cystack/certimanager/public/get-new-num'
+    let expired_num = 'http://localhost/cystack/certimanager/public/get-expired-num'
+    let all_cert_num = 'http://localhost/cystack/certimanager/public/get-all-num'
+    let get_all = 'http://localhost/cystack/certimanager/public/display-all'
+    let get_expired = 'http://localhost/cystack/certimanager/public/display-expired'
+    axios.get(all_cert_num).then((res) => {
       const number = res.data
       setNumber(number)
       console.log(number)
     })
   }, [])
+  axios.get(get_all).then((res) => {
+    const certificate=res.data
+  })
   const random = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
