@@ -56,23 +56,35 @@ const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
 const Dashboard = () => {
-  const [number, setNumber] = useState([])
-  const[certificate,setCertificate]=useState([])
-  useEffect(() => {
-    let new_num = 'http://localhost/cystack/certimanager/public/get-new-num'
-    let expired_num = 'http://localhost/cystack/certimanager/public/get-expired-num'
-    let all_cert_num = 'http://localhost/cystack/certimanager/public/get-all-num'
-    let get_all = 'http://localhost/cystack/certimanager/public/display-all'
-    let get_expired = 'http://localhost/cystack/certimanager/public/display-expired'
-    axios.get(all_cert_num).then((res) => {
-      const number = res.data
-      setNumber(number)
-      console.log(number)
-    })
-  }, [])
-  axios.get(get_all).then((res) => {
-    const certificate=res.data
-  })
+  // let new_num = 'http://localhost/cystack/certimanager/public/get-new-num'
+  // let expired_num = 'http://localhost/cystack/certimanager/public/get-expired-num'
+  // let all_cert_num = 'http://localhost/cystack/certimanager/public/get-all-num'
+  // let get_all = 'http://localhost/cystack/certimanager/public/display-all'
+  // let get_expired = 'http://localhost/cystack/certimanager/public/display-expired'
+  // const [certificate, setCertificate] = useState([]) //used for fetching the data about certificates
+  // const [number, setNumber] = useState([]) //used for fetching the certificates number
+  // useEffect(() => {
+  //   axios
+  //     .get(all_cert_num)
+  //     .then((res) => {
+  //       console.log(res)
+  //       setNumber(data)
+  //     })
+  //     .catch((err) => {
+  //       console.error(err)
+  //     })
+  // }, [])
+  // axios
+  //   .get(get_all)
+  //   .then((res) => {
+  //     console.log(res)
+  //     setCertificate(data)
+  //   })
+  //   .catch((err) => {
+  //     console.error(err)
+  //     }),[]
+
+
   const random = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
@@ -267,20 +279,20 @@ const Dashboard = () => {
       <CRow>
         <CCol xs>
           <CCard className="mb-4">
-            <CCardHeader>Traffic {' & '} Sales</CCardHeader>
+            <CCardHeader>Certificates </CCardHeader>
             <CCardBody>
               <CRow>
                 <CCol xs={12} md={6} xl={6}>
                   <CRow>
                     <CCol sm={6}>
                       <div className="border-start border-start-4 border-start-info py-1 px-3">
-                        <div className="text-medium-emphasis small">New Clients</div>
-                        <div className="fs-5 fw-semibold">9,123</div>
+                        <div className="text-medium-emphasis small">All certificates</div>
+                        <div className="fs-5 fw-semibold"></div>
                       </div>
                     </CCol>
                     <CCol sm={6}>
                       <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-                        <div className="text-medium-emphasis small">Recurring Clients</div>
+                        <div className="text-medium-emphasis small">Expired certificates</div>
                         <div className="fs-5 fw-semibold">22,643</div>
                       </div>
                     </CCol>
@@ -310,8 +322,8 @@ const Dashboard = () => {
                     </CCol>
                     <CCol sm={6}>
                       <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
-                        <div className="text-medium-emphasis small">Organic</div>
-                        <div className="fs-5 fw-semibold">49,123</div>
+                        <div className="text-medium-emphasis small">New Certificates</div>
+                        <div className="fs-5 fw-semibold"></div>
                       </div>
                     </CCol>
                   </CRow>
@@ -356,10 +368,8 @@ const Dashboard = () => {
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead color="light">
                   <CTableRow>
-                    <CTableHeaderCell className="text-center">
-                      <CIcon icon={cilPeople} />
-                    </CTableHeaderCell>
-                    <CTableHeaderCell>User</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center"></CTableHeaderCell>
+                    <CTableHeaderCell>Issuer name</CTableHeaderCell>
                     <CTableHeaderCell className="text-center">Country</CTableHeaderCell>
                     <CTableHeaderCell>Usage</CTableHeaderCell>
                     <CTableHeaderCell className="text-center">Payment Method</CTableHeaderCell>
@@ -369,9 +379,6 @@ const Dashboard = () => {
                 <CTableBody>
                   {tableExample.map((item, index) => (
                     <CTableRow v-for="item in tableItems" key={index}>
-                      <CTableDataCell className="text-center">
-                        <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
-                      </CTableDataCell>
                       <CTableDataCell>
                         <div>{item.user.name}</div>
                         <div className="small text-medium-emphasis">

@@ -19,7 +19,7 @@ class CertificateController extends Controller
     $certificate=Certificates::get()
     ->where('Not_After','>',Carbon::now());
     
-    return view('display' , compact('certificate'));
+    return $certificate->toJson();
   }
 
 
@@ -28,14 +28,12 @@ class CertificateController extends Controller
     $certificate=Certificates::paginate()
     ->where(Carbon::now()->subDays(7),'<','Not_Before','<',Carbon::now());
     
-    return response()
-            ->json(['name' => 'Abigail', 'state' => 'CA'])
-            ->withCallback($certificate->input('callback'));
+    return $certificate->toJson();
   }
   public function getAllCertificates()
   {
-    $certificate=Certificates::get()->json();
-    return $certificate;
+    $certificate=Certificates::get();
+    return $certificate->toJson();
 
    
   }
@@ -53,5 +51,6 @@ public function getexpiredNum(){
 public function getnewcertNum(){
   $certificate=Certificates::count()
   ->where(Carbon::now()->subDays(7),'<','Not_Before','<',Carbon::now());
+  return $certificate;
 }
 }
