@@ -14,18 +14,15 @@ import { DocsCallout } from 'src/components'
 const Charts = () => {
   const [number, setNumber] = useState([])
   useEffect(() => {
-    axios.get('http://localhost/cystack/certimanager/public/get-all-num').then((res) => {
+    let new_num='http://localhost/cystack/certimanager/public/get-new-num';
+    let expired_num='http://localhost/cystack/certimanager/public/get-expired-num';
+    let all_cert_num='http://localhost/cystack/certimanager/public/get-all-num';
+    axios.get(all_cert_num).then((res) => {
       const number = res.data
       setNumber(number)
-      console.log(number)
+    //  console.log(number)
     })
-  }, []);
-  //   axios.get('http://localhost/cystack/certimanager/public/get-all-num').then((res) => {
-  //     const number = res.data
-  //     setNumber(number)
-  //     console.log(number)
-  //   })
-  // }, []);
+  }, [])
   const random = () => Math.round(Math.random() * 100)
 
   return (
