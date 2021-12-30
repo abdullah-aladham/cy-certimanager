@@ -56,34 +56,54 @@ const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
 const Dashboard = () => {
-  // let new_num = 'http://localhost/cystack/certimanager/public/get-new-num'
-  // let expired_num = 'http://localhost/cystack/certimanager/public/get-expired-num'
-  // let all_cert_num = 'http://localhost/cystack/certimanager/public/get-all-num'
-  // let get_all = 'http://localhost/cystack/certimanager/public/display-all'
-  // let get_expired = 'http://localhost/cystack/certimanager/public/display-expired'
-  // const [certificate, setCertificate] = useState([]) //used for fetching the data about certificates
-  // const [number, setNumber] = useState([]) //used for fetching the certificates number
-  // useEffect(() => {
-  //   axios
-  //     .get(all_cert_num)
-  //     .then((res) => {
-  //       console.log(res)
-  //       setNumber(data)
-  //     })
-  //     .catch((err) => {
-  //       console.error(err)
-  //     })
-  // }, [])
-  // axios
-  //   .get(get_all)
-  //   .then((res) => {
-  //     console.log(res)
-  //     setCertificate(data)
-  //   })
-  //   .catch((err) => {
-  //     console.error(err)
-  //     }),[]
+  let new_num = 'http://localhost/cystack/certimanager/public/get-new-num'
+  let expired_num = 'http://localhost/cystack/certimanager/public/get-expired-num'
+  let all_cert_num = 'http://localhost/cystack/certimanager/public/get-all-num'
+  let get_all = 'http://localhost/cystack/certimanager/public/display-all'
+  let get_expired = 'http://localhost/cystack/certimanager/public/display-expired'
+  let get_new = 'http://localhost/cystack/certimanager/public/display-new-certificates'
+  const [certificate, setCertificate] = useState([]) //used for fetching the data about certificates
+  const [number, setNumber] = useState([]) //used for fetching the certificates number
+  useEffect(() => {
+    axios
+      .get(all_cert_num)
+      .then((res) => {
+        console.log(res)
+        setNumber(number)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }, [])
+  axios
+    .get(get_all)
+    .then((res) => {
+      console.log(res)
+      setCertificate(certificate)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
 
+  axios
+    .get(new_num)
+    .then((res) => {
+      console.log(res)
+      setNumber(number)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+
+  axios
+    .get(all_cert_num)
+    .then((res) => {
+      console.log(res)
+      setNumber(number)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
 
   const random = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -418,5 +438,4 @@ const Dashboard = () => {
     </>
   )
 }
-
 export default Dashboard

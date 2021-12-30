@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { CCard, CCardBody, CCol, CCardHeader, CRow } from '@coreui/react'
-import axios from 'axios'
 import {
   CChartBar,
   CChartDoughnut,
@@ -12,8 +11,10 @@ import {
 import { DocsCallout } from 'src/components'
 
 const Charts = () => {
-  const random = () => Math.round(Math.random() * 100)
+  const [data, setData] = useState([])
 
+  useEffect(() => {}, [])
+  const random = () => Math.round(Math.random() * 100)
   return (
     <CRow>
       <CCol xs={12}>
