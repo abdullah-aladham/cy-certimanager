@@ -51,60 +51,119 @@ import avatar3 from 'src/assets/images/avatars/3.jpg'
 import avatar4 from 'src/assets/images/avatars/4.jpg'
 import avatar5 from 'src/assets/images/avatars/5.jpg'
 import avatar6 from 'src/assets/images/avatars/6.jpg'
+// import Allcertsnum from '../api-routing/all-certsnum.js'
+// import { get } from 'core-js/core/dict'
+// import Datafetching from 'src/Datafetching.js'
 
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
 const Dashboard = () => {
-  let new_num = 'http://localhost/cystack/certimanager/public/get-new-num'
-  let expired_num = 'http://localhost/cystack/certimanager/public/get-expired-num'
   let all_cert_num = 'http://localhost/cystack/certimanager/public/get-all-num'
-  let get_all = 'http://localhost/cystack/certimanager/public/display-all'
-  let get_expired = 'http://localhost/cystack/certimanager/public/display-expired'
-  let get_new = 'http://localhost/cystack/certimanager/public/display-new-certificates'
-  const [certificate, setCertificate] = useState([]) //used for fetching the data about certificates
   const [number, setNumber] = useState([]) //used for fetching the certificates number
-  useEffect(() => {
+  const get_certs_num = () => {
     axios
       .get(all_cert_num)
       .then((res) => {
         console.log(res)
-        setNumber(number)
+        // setCertificate(res.data)
+        setNumber(res.data)
       })
       .catch((err) => {
         console.error(err)
       })
-  }, [])
-  axios
-    .get(get_all)
-    .then((res) => {
-      console.log(res)
-      setCertificate(certificate)
-    })
-    .catch((err) => {
-      console.error(err)
-    })
+  } //this function is used for fetching the number of  all certificates from laravel'
+  useEffect(() => {
+    get_certs_num()
+  }, []) // this is hook for the number of all certificates
+  let expired_num = 'http://localhost/cystack/certimanager/public/get-expired-num'
+  const [expnumber, setExpNumber] = useState([]) //used for fetching the certificates number
 
-  axios
-    .get(new_num)
-    .then((res) => {
-      console.log(res)
-      setNumber(number)
-    })
-    .catch((err) => {
-      console.error(err)
-    })
+  const get_expired_certs_num = () => {
+    axios
+      .get(expired_num)
+      .then((res) => {
+        console.log(res)
+        setCertificate(res.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  } //function for expired certificates number
+  useEffect(() => {
+    get_expired_certs_num()
+  }, []) //hook for expired certificates number
+  let get_all = 'http://localhost/cystack/certimanager/public/display-all'
 
-  axios
-    .get(all_cert_num)
-    .then((res) => {
-      console.log(res)
-      setNumber(number)
-    })
-    .catch((err) => {
-      console.error(err)
-    })
+  const [certificate, setCertificate] = useState([]) //used for fetching the data about all certificates
+  const fetch_all_certs = () => {
+    axios
+      .get(get_all)
+      .then((res) => {
+        console.log(res)
+        // setCertificate(res.data)
+      }) //this function is for fetching all certificates
+      .catch((err) => {
+        console.error(err)
+      })
+  } //this fetch is used for loading the data to be fetched
+  useEffect(() => {
+    fetch_all_certs()
+  }, []) //this useEffect hook is used for fetching all certificates
+  let get_expired = 'http://localhost/cystack/certimanager/public/display-expired'
+  const [expcertificate, setExpCertificate] = useState([]) //used for fetching the data about all certificates
+  const get_expired_certs = () => {
+    axios
+      .get(get_expired)
+      .then((res) => {
+        console.log(res)
+        // setCertificate(res.data)
+        // setExpNumber(res.data)
+        setExpCertificate(res.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  } //this function is used for get expired certificates
+  useEffect(() => {
+    get_expired_certs()
+  }, []) //hook for expired certificates
+  let get_new = 'http://localhost/cystack/certimanager/public/display-new-certificates'
+  const [newcertificate, setNewCertificate] = useState([]) //used for fetching the data about all certificates
 
+  useEffect(() => {
+    get_new_certs()
+  }, []) //hook for fetching new certs function
+
+  const get_new_certs = () => {
+    axios
+      .get(get_new)
+      .then((res) => {
+        console.log(res)
+        // setCertificate(res.data)
+        setNewCertificate(res.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  } //function for fetching new certificates
+  let new_num = 'http://localhost/cystack/certimanager/public/get-new-num'
+  const [newnumber, setNewNumber] = useState([]) //used for fetching the new certificates number
+  useEffect(() => {
+    get_new_cert_num()
+  }, []) //this is a hook for fetching new certificates number
+  const get_new_cert_num = () => {
+    axios
+      .get(new_num)
+      .then((res) => {
+        console.log(res)
+        // setCertificate(res.data)
+        setNewNumber(res.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  } //this is a hook for getting new certificates number from laravel api
   const random = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
@@ -139,96 +198,96 @@ const Dashboard = () => {
     { title: 'LinkedIn', icon: cibLinkedin, percent: 8, value: '27,319' },
   ]
 
-  const tableExample = [
-    {
-      avatar: { src: avatar1, status: 'success' },
-      user: {
-        name: 'Yiorgos Avraamu',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'USA', flag: cifUs },
-      usage: {
-        value: 50,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Mastercard', icon: cibCcMastercard },
-      activity: '10 sec ago',
-    },
-    {
-      avatar: { src: avatar2, status: 'danger' },
-      user: {
-        name: 'Avram Tarasios',
-        new: false,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Brazil', flag: cifBr },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'info',
-      },
-      payment: { name: 'Visa', icon: cibCcVisa },
-      activity: '5 minutes ago',
-    },
-    {
-      avatar: { src: avatar3, status: 'warning' },
-      user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
-      country: { name: 'India', flag: cifIn },
-      usage: {
-        value: 74,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'warning',
-      },
-      payment: { name: 'Stripe', icon: cibCcStripe },
-      activity: '1 hour ago',
-    },
-    {
-      avatar: { src: avatar4, status: 'secondary' },
-      user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
-      country: { name: 'France', flag: cifFr },
-      usage: {
-        value: 98,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'danger',
-      },
-      payment: { name: 'PayPal', icon: cibCcPaypal },
-      activity: 'Last month',
-    },
-    {
-      avatar: { src: avatar5, status: 'success' },
-      user: {
-        name: 'Agapetus Tadeáš',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Spain', flag: cifEs },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'primary',
-      },
-      payment: { name: 'Google Wallet', icon: cibCcApplePay },
-      activity: 'Last week',
-    },
-    {
-      avatar: { src: avatar6, status: 'danger' },
-      user: {
-        name: 'Friderik Dávid',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Poland', flag: cifPl },
-      usage: {
-        value: 43,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Amex', icon: cibCcAmex },
-      activity: 'Last week',
-    },
-  ]
+  // const tableExample = [
+  //   {
+  //     avatar: { src: avatar1, status: 'success' },
+  //     user: {
+  //       name: 'Yiorgos Avraamu',
+  //       new: true,
+  //       registered: 'Jan 1, 2021',
+  //     },
+  //     country: { name: 'USA', flag: cifUs },
+  //     usage: {
+  //       value: 50,
+  //       period: 'Jun 11, 2021 - Jul 10, 2021',
+  //       color: 'success',
+  //     },
+  //     payment: { name: 'Mastercard', icon: cibCcMastercard },
+  //     activity: '10 sec ago',
+  //   },
+  //   {
+  //     avatar: { src: avatar2, status: 'danger' },
+  //     user: {
+  //       name: 'Avram Tarasios',
+  //       new: false,
+  //       registered: 'Jan 1, 2021',
+  //     },
+  //     country: { name: 'Brazil', flag: cifBr },
+  //     usage: {
+  //       value: 22,
+  //       period: 'Jun 11, 2021 - Jul 10, 2021',
+  //       color: 'info',
+  //     },
+  //     payment: { name: 'Visa', icon: cibCcVisa },
+  //     activity: '5 minutes ago',
+  //   },
+  //   {
+  //     avatar: { src: avatar3, status: 'warning' },
+  //     user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
+  //     country: { name: 'India', flag: cifIn },
+  //     usage: {
+  //       value: 74,
+  //       period: 'Jun 11, 2021 - Jul 10, 2021',
+  //       color: 'warning',
+  //     },
+  //     payment: { name: 'Stripe', icon: cibCcStripe },
+  //     activity: '1 hour ago',
+  //   },
+  //   {
+  //     avatar: { src: avatar4, status: 'secondary' },
+  //     user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
+  //     country: { name: 'France', flag: cifFr },
+  //     usage: {
+  //       value: 98,
+  //       period: 'Jun 11, 2021 - Jul 10, 2021',
+  //       color: 'danger',
+  //     },
+  //     payment: { name: 'PayPal', icon: cibCcPaypal },
+  //     activity: 'Last month',
+  //   },
+  //   {
+  //     avatar: { src: avatar5, status: 'success' },
+  //     user: {
+  //       name: 'Agapetus Tadeáš',
+  //       new: true,
+  //       registered: 'Jan 1, 2021',
+  //     },
+  //     country: { name: 'Spain', flag: cifEs },
+  //     usage: {
+  //       value: 22,
+  //       period: 'Jun 11, 2021 - Jul 10, 2021',
+  //       color: 'primary',
+  //     },
+  //     payment: { name: 'Google Wallet', icon: cibCcApplePay },
+  //     activity: 'Last week',
+  //   },
+  //   {
+  //     avatar: { src: avatar6, status: 'danger' },
+  //     user: {
+  //       name: 'Friderik Dávid',
+  //       new: true,
+  //       registered: 'Jan 1, 2021',
+  //     },
+  //     country: { name: 'Poland', flag: cifPl },
+  //     usage: {
+  //       value: 43,
+  //       period: 'Jun 11, 2021 - Jul 10, 2021',
+  //       color: 'success',
+  //     },
+  //     payment: { name: 'Amex', icon: cibCcAmex },
+  //     activity: 'Last week',
+  //   },
+  // ]
 
   return (
     <>
@@ -266,11 +325,11 @@ const Dashboard = () => {
               <CCardBody>
                 <CChartDoughnut
                   data={{
-                    labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+                    labels: ['Not Before', 'Not After'],
                     datasets: [
                       {
-                        backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-                        data: [40, 20, 80, 10],
+                        backgroundColor: ['#41B883', '#E46651'],
+                        data: [50, 80],
                       },
                     ],
                   }}
@@ -317,7 +376,6 @@ const Dashboard = () => {
                       </div>
                     </CCol>
                   </CRow>
-
                   <hr className="mt-0" />
                   {progressGroupExample1.map((item, index) => (
                     <div className="progress-group mb-4" key={index}>
@@ -388,52 +446,56 @@ const Dashboard = () => {
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead color="light">
                   <CTableRow>
-                    <CTableHeaderCell className="text-center"></CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">id</CTableHeaderCell>
                     <CTableHeaderCell>Issuer name</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Country</CTableHeaderCell>
-                    <CTableHeaderCell>Usage</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Payment Method</CTableHeaderCell>
-                    <CTableHeaderCell>Activity</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Issuer id</CTableHeaderCell>
+                    <CTableHeaderCell>Common Name</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Logged At</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Not Before</CTableHeaderCell>
+                    <CTableHeaderCell>Not After</CTableHeaderCell>
+                    <CTableHeaderCell>Serial number</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  {tableExample.map((item, index) => (
-                    <CTableRow v-for="item in tableItems" key={index}>
-                      <CTableDataCell>
-                        <div>{item.user.name}</div>
-                        <div className="small text-medium-emphasis">
-                          <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registered:{' '}
-                          {item.user.registered}
+                  <CTableRow>
+                    {/*v-for="item in tableItems" */}
+                    <CTableDataCell>
+                      <div></div>
+                      <div className="small text-medium-emphasis"></div>
+                    </CTableDataCell>
+                    <CTableDataCell className="text-center">
+                      <CIcon size="xl" />
+                    </CTableDataCell>
+                    <CTableDataCell>
+                      <div className="clearfix">
+                        <div className="float-start">
+                          <strong></strong>
                         </div>
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.country.flag} title={item.country.name} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div className="clearfix">
-                          <div className="float-start">
-                            <strong>{item.usage.value}%</strong>
-                          </div>
-                          <div className="float-end">
-                            <small className="text-medium-emphasis">{item.usage.period}</small>
-                          </div>
+                        <div className="float-end">
+                          <small className="text-medium-emphasis"></small>
                         </div>
-                        <CProgress thin color={item.usage.color} value={item.usage.value} />
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.payment.icon} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div className="small text-medium-emphasis">Last login</div>
-                        <strong>{item.activity}</strong>
-                      </CTableDataCell>
-                    </CTableRow>
-                  ))}
+                      </div>
+                      <CProgress thin />
+                    </CTableDataCell>
+                    <CTableDataCell className="text-center">
+                      <CIcon size="xl" />
+                    </CTableDataCell>
+                    <CTableDataCell>
+                      <div className="small text-medium-emphasis"></div>
+                      <strong></strong>
+                    </CTableDataCell>
+                  </CTableRow>
                 </CTableBody>
               </CTable>
             </CCardBody>
           </CCard>
         </CCol>
+        {/* <div>
+          <ul>
+            {certificate.map(certificate =><li key={certificate.id}>{certificate.Notbefore}</li>)}
+            
+          </ul>
+        </div> */}
       </CRow>
     </>
   )
