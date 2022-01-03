@@ -325,11 +325,11 @@ const Dashboard = () => {
           </CRow>
           <CCol xs={6}>
             <CCard className="mb-4">
-              <CCardHeader>Doughnut Chart</CCardHeader>
+              <CCardHeader>Certificates Chart</CCardHeader>
               <CCardBody>
                 <CChartDoughnut
                   data={{
-                    labels: ['Not Before', 'Not After'],
+                    labels: ['New Certs', 'Expired Certificates'],
                     datasets: [
                       {
                         backgroundColor: ['#41B883', '#E46651'],
@@ -376,7 +376,7 @@ const Dashboard = () => {
                     <CCol sm={6}>
                       <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
                         <div className="text-medium-emphasis small">Expired certificates</div>
-                        <div className="fs-5 fw-semibold">22,643</div>
+                        <div className="fs-5 fw-semibold">{expnumber}</div>
                       </div>
                     </CCol>
                   </CRow>
@@ -396,16 +396,16 @@ const Dashboard = () => {
 
                 <CCol xs={12} md={6} xl={6}>
                   <CRow>
-                    <CCol sm={6}>
+                    {/* <CCol sm={6}>
                       <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
                         <div className="text-medium-emphasis small">Pageviews</div>
                         <div className="fs-5 fw-semibold">78,623</div>
                       </div>
-                    </CCol>
+                    </CCol> */}
                     <CCol sm={6}>
                       <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
                         <div className="text-medium-emphasis small">New Certificates</div>
-                        <div className="fs-5 fw-semibold"></div>
+                        <div className="fs-5 fw-semibold">{newnumber}</div>
                       </div>
                     </CCol>
                   </CRow>
@@ -461,70 +461,91 @@ const Dashboard = () => {
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  <CTableRow>
-                    {/*v-for="item in tableItems" */}
-                    <CTableDataCell>
-                      <div>
-                        {certificate.map((certificate) => {
-                          return <div key={certificate.Issuer_Name}>{certificate.id}</div>
-                        })}
-                      </div>
-                      <div className="small text-medium-emphasis"></div>
-                    </CTableDataCell>
-                    <CTableDataCell className="text-center">
-                      {certificate.map((certificate) => {
+                  {certificate.map((certificate) => {
+                    return (
+                      <CTableRow key={certificate.id}>
+                        {/*v-for="item in tableItems" */}
+                        <CTableDataCell>
+                          {/* {certificate.map((certificate) => {
+                        return (
+                          <tr key={certificate.Issuer_Name}>
+                            <td>{certificate.id}</td>
+                          </tr>
+                        )
+                      })} */}
+                          <div className="small text-medium-emphasis">{certificate.id}</div>
+                        </CTableDataCell>
+                        <CTableDataCell className="text-center">
+                          {certificate.Issuer_Name}
+                          {/* {certificate.map((certificate) => {
                         return <div key={certificate.id}>{certificate.Issuer_id}</div>
-                      })}
-                      {/* <div>{certificate.Issuer_Name}</div> */}
-                      <div className="small text-medium-emphasis"></div>
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      <div className="clearfix">
-                        <div className="float-start">
+                      })} */}
+                          {/* <div>{certificate.Issuer_Name}</div> */}
+                          <div className="small text-medium-emphasis"></div>
+                        </CTableDataCell>
+                        <CTableDataCell>
+                          {/* {certificate.map((certificate) => {
+                        return <div key={certificate.id}>{certificate.Issuer_Name}</div>
+                      })} */}
+                          {/* {certificate.map((certificate) => {
+                        return <div key={certificate.id}>{certificate.Issuer_id}</div>
+                          })} */}
+                          {certificate.Issuer_id}
+                          <div className="clearfix">
+                            <div className="float-start">
+                              <strong></strong>
+                            </div>
+                            <div className="float-end">
+                              <small className="text-medium-emphasis">
+                                {/* {certificate.map((certificate) => {
+                              return <div key={certificate.id}>{certificate.Issuer_Name}</div>
+                            })} */}
+                              </small>
+                            </div>
+                          </div>
+                          <CProgress thin />
+                        </CTableDataCell>
+
+                        <CTableDataCell className="text-center">
+                          {certificate.Common_Name}
+                          {/* {certificate.map((certificate) => {
+                          return <div key={certificate.id}>{certificate.Logged_At}</div>
+                      })} */}
+                        </CTableDataCell>
+                        <CTableDataCell>
+                          {certificate.Logged_At}
+                          {/* {certificate.map((certificate) => {
+                          return <div key={certificate.id}>{certificate.Not_Before}</div>
+                      })} */}
+                          <div className="small text-medium-emphasis"></div>
                           <strong></strong>
-                        </div>
-                        <div className="float-end">
-                          <small className="text-medium-emphasis"></small>
-                        </div>
-                      </div>
-                      <CProgress thin />
-                    </CTableDataCell>
-                    {certificate.map((certificate) => {
-                      return <div key={certificate.id}>{certificate.Issuer_Name}</div>
-                    })}
-                    <CTableDataCell className="text-center">
-                      {certificate.map((certificate) => {
-                        return <div key={certificate.id}>{certificate.Logged_At}</div>
-                      })}
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      {certificate.map((certificate) => {
-                        return <div key={certificate.id}>{certificate.Not_Before}</div>
-                      })}
-                      <div className="small text-medium-emphasis"></div>
-                      <strong></strong>
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      <div>
-                        {certificate.map((certificate) => {
+                        </CTableDataCell>
+                        <CTableDataCell>
+                          {certificate.Not_Before}
+                          <div>
+                            {/* {certificate.map((certificate) => {
                           return <div key={certificate.id}>{certificate.Not_After}</div>
-                        })}
-                      </div>
-                      <div className="small text-medium-emphasis"></div>
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      <div>
-                        {certificate.map((certificate) => {
+                        })} */}
+                          </div>
+                          <div className="small text-medium-emphasis"></div>
+                        </CTableDataCell>
+                        <CTableDataCell>
+                          {certificate.Not_After}
+                          <tr>
+                            {/* {certificate.map((certificate) => {
                           return <div key={certificate.id}>{certificate.serial_number}</div>
-                        })}
-                      </div>
-                      <div className="small text-medium-emphasis"></div>
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      <div></div>
-                      <div className="small text-medium-emphasis"></div>
-                    </CTableDataCell>
-                  </CTableRow>
+                        })} */}
+                          </tr>
+                          <div className="small text-medium-emphasis"></div>
+                        </CTableDataCell>
+                        <CTableDataCell>
+                          {certificate.serial_number}
+                          <div></div>
+                          <div className="small text-medium-emphasis"></div>
+                        </CTableDataCell>
+                      </CTableRow>
+                    )
+                  })}
                 </CTableBody>
               </CTable>
             </CCardBody>

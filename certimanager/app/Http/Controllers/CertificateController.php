@@ -48,8 +48,8 @@ public function getexpiredNum(){
   return $certificate->count();
 }
 public function getnewcertNum(){
-  $certificate=Certificates::where(Carbon::now()->subDays(7),'<','Not_Before','<',Carbon::now());
-  
+  $certificate=Certificates::where('Not_Before','>',Carbon::now()->subDays(7));
+
   return $certificate->count();
 }
 }
