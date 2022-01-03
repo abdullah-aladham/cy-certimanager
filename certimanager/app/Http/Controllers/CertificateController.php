@@ -44,13 +44,12 @@ class CertificateController extends Controller
   
   }
 public function getexpiredNum(){
-  $certificate=Certificates::count()
-  ->where(Carbon::now(),'>','Not_After');
-  return $certificate;
+  $certificate= Certificates::where('Not_After','>',Carbon::now());
+  return $certificate->count();
 }
 public function getnewcertNum(){
-  $certificate=Certificates::count()
-  ->where(Carbon::now()->subDays(7),'<','Not_Before','<',Carbon::now());
-  return $certificate;
+  $certificate=Certificates::where(Carbon::now()->subDays(7),'<','Not_Before','<',Carbon::now());
+  
+  return $certificate->count();
 }
 }

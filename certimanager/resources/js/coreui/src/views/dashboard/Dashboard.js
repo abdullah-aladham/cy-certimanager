@@ -65,8 +65,8 @@ const Dashboard = () => {
     axios
       .get(all_cert_num)
       .then((res) => {
-        console.log(res)
-        // setCertificate(res.data)
+        //console.log(res)
+        //setCertificate(res.data)
         setNumber(res.data)
       })
       .catch((err) => {
@@ -83,8 +83,8 @@ const Dashboard = () => {
     axios
       .get(expired_num)
       .then((res) => {
-        console.log(res)
-        setCertificate(res.data)
+        //console.log(res)
+        setExpNumber(res.data)
       })
       .catch((err) => {
         console.error(err)
@@ -101,7 +101,7 @@ const Dashboard = () => {
       .get(get_all)
       .then((res) => {
         console.log(res)
-        // setCertificate(res.data)
+        setCertificate(res.data)
       }) //this function is for fetching all certificates
       .catch((err) => {
         console.error(err)
@@ -110,13 +110,17 @@ const Dashboard = () => {
   useEffect(() => {
     fetch_all_certs()
   }, []) //this useEffect hook is used for fetching all certificates
-  let get_expired = 'http://localhost/cystack/certimanager/public/display-expired'
-  const [expcertificate, setExpCertificate] = useState([]) //used for fetching the data about all certificates
+  let get_expired = 'http://localhost/cystack/certimanager/public/get-expired-num'
+  const [expcertificate, setExpCertificate] = useState(0) //used for fetching the data about all certificates
+  //const [expired, setExpired] = useState(0)
+  console.log('Ibrahim')
   const get_expired_certs = () => {
     axios
       .get(get_expired)
       .then((res) => {
         console.log(res)
+        expcertificate = setExpCertificate(res)
+        console.log(expcertificate)
         // setCertificate(res.data)
         // setExpNumber(res.data)
         setExpCertificate(res.data)
@@ -125,28 +129,28 @@ const Dashboard = () => {
         console.error(err)
       })
   } //this function is used for get expired certificates
-  useEffect(() => {
-    get_expired_certs()
-  }, []) //hook for expired certificates
-  let get_new = 'http://localhost/cystack/certimanager/public/display-new-certificates'
-  const [newcertificate, setNewCertificate] = useState([]) //used for fetching the data about all certificates
+  // useEffect(() => {
+  //   get_expired_certs()
+  // }, []) //hook for expired certificates
+  // let get_new = 'http://localhost/cystack/certimanager/public/display-new-certificates'
+  // const [newcertificate, setNewCertificate] = useState([]) //used for fetching the data about new certificates
 
-  useEffect(() => {
-    get_new_certs()
-  }, []) //hook for fetching new certs function
+  // useEffect(() => {
+  //   get_new_certs()
+  // }, []) //hook for fetching new certs function
 
-  const get_new_certs = () => {
-    axios
-      .get(get_new)
-      .then((res) => {
-        console.log(res)
-        // setCertificate(res.data)
-        setNewCertificate(res.data)
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-  } //function for fetching new certificates
+  // const get_new_certs = () => {
+  //   axios
+  //     .get(get_new)
+  //     .then((res) => {
+  //       console.log(res)
+  //       // setCertificate(res.data)
+  //       setNewCertificate(res.data)
+  //     })
+  //     .catch((err) => {
+  //       console.error(err)
+  //     })
+  // } //function for fetching new certificates
   let new_num = 'http://localhost/cystack/certimanager/public/get-new-num'
   const [newnumber, setNewNumber] = useState([]) //used for fetching the new certificates number
   useEffect(() => {
@@ -329,7 +333,7 @@ const Dashboard = () => {
                     datasets: [
                       {
                         backgroundColor: ['#41B883', '#E46651'],
-                        data: [50, 80],
+                        data: [expnumber, newnumber],
                       },
                     ],
                   }}
@@ -366,7 +370,7 @@ const Dashboard = () => {
                     <CCol sm={6}>
                       <div className="border-start border-start-4 border-start-info py-1 px-3">
                         <div className="text-medium-emphasis small">All certificates</div>
-                        <div className="fs-5 fw-semibold"></div>
+                        <div className="fs-5 fw-semibold">{number}</div>
                       </div>
                     </CCol>
                     <CCol sm={6}>
@@ -460,11 +464,19 @@ const Dashboard = () => {
                   <CTableRow>
                     {/*v-for="item in tableItems" */}
                     <CTableDataCell>
-                      <div></div>
+                      <div>
+                        {certificate.map((certificate) => {
+                          return <div key={certificate.Issuer_Name}>{certificate.id}</div>
+                        })}
+                      </div>
                       <div className="small text-medium-emphasis"></div>
                     </CTableDataCell>
                     <CTableDataCell className="text-center">
-                      <CIcon size="xl" />
+                      {certificate.map((certificate) => {
+                        return <div key={certificate.id}>{certificate.Issuer_id}</div>
+                      })}
+                      {/* <div>{certificate.Issuer_Name}</div> */}
+                      <div className="small text-medium-emphasis"></div>
                     </CTableDataCell>
                     <CTableDataCell>
                       <div className="clearfix">
@@ -477,12 +489,40 @@ const Dashboard = () => {
                       </div>
                       <CProgress thin />
                     </CTableDataCell>
+                    {certificate.map((certificate) => {
+                      return <div key={certificate.id}>{certificate.Issuer_Name}</div>
+                    })}
                     <CTableDataCell className="text-center">
-                      <CIcon size="xl" />
+                      {certificate.map((certificate) => {
+                        return <div key={certificate.id}>{certificate.Logged_At}</div>
+                      })}
                     </CTableDataCell>
                     <CTableDataCell>
+                      {certificate.map((certificate) => {
+                        return <div key={certificate.id}>{certificate.Not_Before}</div>
+                      })}
                       <div className="small text-medium-emphasis"></div>
                       <strong></strong>
+                    </CTableDataCell>
+                    <CTableDataCell>
+                      <div>
+                        {certificate.map((certificate) => {
+                          return <div key={certificate.id}>{certificate.Not_After}</div>
+                        })}
+                      </div>
+                      <div className="small text-medium-emphasis"></div>
+                    </CTableDataCell>
+                    <CTableDataCell>
+                      <div>
+                        {certificate.map((certificate) => {
+                          return <div key={certificate.id}>{certificate.serial_number}</div>
+                        })}
+                      </div>
+                      <div className="small text-medium-emphasis"></div>
+                    </CTableDataCell>
+                    <CTableDataCell>
+                      <div></div>
+                      <div className="small text-medium-emphasis"></div>
                     </CTableDataCell>
                   </CTableRow>
                 </CTableBody>
