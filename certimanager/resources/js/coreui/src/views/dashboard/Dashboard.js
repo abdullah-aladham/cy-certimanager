@@ -1,9 +1,9 @@
 import React, { lazy, useState, useEffect } from 'react'
 
 import {
-  CAvatar,
-  CButton,
-  CButtonGroup,
+  // CAvatar,
+  // CButton,
+  // CButtonGroup,
   CCard,
   CCardBody,
   CCardFooter,
@@ -23,12 +23,12 @@ import { CChartLine } from '@coreui/react-chartjs'
 import { getStyle, hexToRgba } from '@coreui/utils'
 import CIcon from '@coreui/icons-react'
 import {
-  cibCcAmex,
-  cibCcApplePay,
-  cibCcMastercard,
-  cibCcPaypal,
-  cibCcStripe,
-  cibCcVisa,
+  // cibCcAmex,
+  // cibCcApplePay,
+  // cibCcMastercard,
+  // cibCcPaypal,
+  // cibCcStripe,
+  // cibCcVisa,
   cibGoogle,
   cibFacebook,
   cibLinkedin,
@@ -45,12 +45,12 @@ import {
   cilUserFemale,
 } from '@coreui/icons'
 import axios from 'axios'
-import avatar1 from 'src/assets/images/avatars/1.jpg'
-import avatar2 from 'src/assets/images/avatars/2.jpg'
-import avatar3 from 'src/assets/images/avatars/3.jpg'
-import avatar4 from 'src/assets/images/avatars/4.jpg'
-import avatar5 from 'src/assets/images/avatars/5.jpg'
-import avatar6 from 'src/assets/images/avatars/6.jpg'
+// import avatar1 from 'src/assets/images/avatars/1.jpg'
+// import avatar2 from 'src/assets/images/avatars/2.jpg'
+// import avatar3 from 'src/assets/images/avatars/3.jpg'
+// import avatar4 from 'src/assets/images/avatars/4.jpg'
+// import avatar5 from 'src/assets/images/avatars/5.jpg'
+// import avatar6 from 'src/assets/images/avatars/6.jpg'
 // import Allcertsnum from '../api-routing/all-certsnum.js'
 // import { get } from 'core-js/core/dict'
 // import Datafetching from 'src/Datafetching.js'
@@ -161,7 +161,6 @@ const Dashboard = () => {
       .get(new_num)
       .then((res) => {
         console.log(res)
-        // setCertificate(res.data)
         setNewNumber(res.data)
       })
       .catch((err) => {
@@ -201,97 +200,6 @@ const Dashboard = () => {
     { title: 'Twitter', icon: cibTwitter, percent: 11, value: '37,564' },
     { title: 'LinkedIn', icon: cibLinkedin, percent: 8, value: '27,319' },
   ]
-
-  // const tableExample = [
-  //   {
-  //     avatar: { src: avatar1, status: 'success' },
-  //     user: {
-  //       name: 'Yiorgos Avraamu',
-  //       new: true,
-  //       registered: 'Jan 1, 2021',
-  //     },
-  //     country: { name: 'USA', flag: cifUs },
-  //     usage: {
-  //       value: 50,
-  //       period: 'Jun 11, 2021 - Jul 10, 2021',
-  //       color: 'success',
-  //     },
-  //     payment: { name: 'Mastercard', icon: cibCcMastercard },
-  //     activity: '10 sec ago',
-  //   },
-  //   {
-  //     avatar: { src: avatar2, status: 'danger' },
-  //     user: {
-  //       name: 'Avram Tarasios',
-  //       new: false,
-  //       registered: 'Jan 1, 2021',
-  //     },
-  //     country: { name: 'Brazil', flag: cifBr },
-  //     usage: {
-  //       value: 22,
-  //       period: 'Jun 11, 2021 - Jul 10, 2021',
-  //       color: 'info',
-  //     },
-  //     payment: { name: 'Visa', icon: cibCcVisa },
-  //     activity: '5 minutes ago',
-  //   },
-  //   {
-  //     avatar: { src: avatar3, status: 'warning' },
-  //     user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
-  //     country: { name: 'India', flag: cifIn },
-  //     usage: {
-  //       value: 74,
-  //       period: 'Jun 11, 2021 - Jul 10, 2021',
-  //       color: 'warning',
-  //     },
-  //     payment: { name: 'Stripe', icon: cibCcStripe },
-  //     activity: '1 hour ago',
-  //   },
-  //   {
-  //     avatar: { src: avatar4, status: 'secondary' },
-  //     user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
-  //     country: { name: 'France', flag: cifFr },
-  //     usage: {
-  //       value: 98,
-  //       period: 'Jun 11, 2021 - Jul 10, 2021',
-  //       color: 'danger',
-  //     },
-  //     payment: { name: 'PayPal', icon: cibCcPaypal },
-  //     activity: 'Last month',
-  //   },
-  //   {
-  //     avatar: { src: avatar5, status: 'success' },
-  //     user: {
-  //       name: 'Agapetus Tadeáš',
-  //       new: true,
-  //       registered: 'Jan 1, 2021',
-  //     },
-  //     country: { name: 'Spain', flag: cifEs },
-  //     usage: {
-  //       value: 22,
-  //       period: 'Jun 11, 2021 - Jul 10, 2021',
-  //       color: 'primary',
-  //     },
-  //     payment: { name: 'Google Wallet', icon: cibCcApplePay },
-  //     activity: 'Last week',
-  //   },
-  //   {
-  //     avatar: { src: avatar6, status: 'danger' },
-  //     user: {
-  //       name: 'Friderik Dávid',
-  //       new: true,
-  //       registered: 'Jan 1, 2021',
-  //     },
-  //     country: { name: 'Poland', flag: cifPl },
-  //     usage: {
-  //       value: 43,
-  //       period: 'Jun 11, 2021 - Jul 10, 2021',
-  //       color: 'success',
-  //     },
-  //     payment: { name: 'Amex', icon: cibCcAmex },
-  //     activity: 'Last week',
-  //   },
-  // ]
 
   return (
     <>
@@ -342,19 +250,7 @@ const Dashboard = () => {
             </CCard>
           </CCol>
         </CCardBody>
-        <CCardFooter>
-          {/* <CRow xs={{ cols: 1 }} md={{ cols: 5 }} className="text-center">
-            {progressExample.map((item, index) => (
-              <CCol className="mb-sm-2 mb-0" key={index}>
-                <div className="text-medium-emphasis">{item.title}</div>
-                <strong>
-                  {item.value} ({item.percent}%)
-                </strong>
-                <CProgress thin className="mt-2" color={item.color} value={item.percent} />
-              </CCol>
-            ))}
-          </CRow> */}
-        </CCardFooter>
+        <CCardFooter></CCardFooter>
       </CCard>
 
       <WidgetsBrand withCharts />
@@ -396,12 +292,6 @@ const Dashboard = () => {
 
                 <CCol xs={12} md={6} xl={6}>
                   <CRow>
-                    {/* <CCol sm={6}>
-                      <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                        <div className="text-medium-emphasis small">Pageviews</div>
-                        <div className="fs-5 fw-semibold">78,623</div>
-                      </div>
-                    </CCol> */}
                     <CCol sm={6}>
                       <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
                         <div className="text-medium-emphasis small">New Certificates</div>
@@ -464,43 +354,21 @@ const Dashboard = () => {
                   {certificate.map((certificate) => {
                     return (
                       <CTableRow key={certificate.id}>
-                        {/*v-for="item in tableItems" */}
                         <CTableDataCell>
-                          {/* {certificate.map((certificate) => {
-                        return (
-                          <tr key={certificate.Issuer_Name}>
-                            <td>{certificate.id}</td>
-                          </tr>
-                        )
-                      })} */}
                           <div className="small text-medium-emphasis">{certificate.id}</div>
                         </CTableDataCell>
                         <CTableDataCell className="text-center">
                           {certificate.Issuer_Name}
-                          {/* {certificate.map((certificate) => {
-                        return <div key={certificate.id}>{certificate.Issuer_id}</div>
-                      })} */}
-                          {/* <div>{certificate.Issuer_Name}</div> */}
                           <div className="small text-medium-emphasis"></div>
                         </CTableDataCell>
                         <CTableDataCell>
-                          {/* {certificate.map((certificate) => {
-                        return <div key={certificate.id}>{certificate.Issuer_Name}</div>
-                      })} */}
-                          {/* {certificate.map((certificate) => {
-                        return <div key={certificate.id}>{certificate.Issuer_id}</div>
-                          })} */}
                           {certificate.Issuer_id}
                           <div className="clearfix">
                             <div className="float-start">
                               <strong></strong>
                             </div>
                             <div className="float-end">
-                              <small className="text-medium-emphasis">
-                                {/* {certificate.map((certificate) => {
-                              return <div key={certificate.id}>{certificate.Issuer_Name}</div>
-                            })} */}
-                              </small>
+                              <small className="text-medium-emphasis"></small>
                             </div>
                           </div>
                           <CProgress thin />
@@ -508,34 +376,20 @@ const Dashboard = () => {
 
                         <CTableDataCell className="text-center">
                           {certificate.Common_Name}
-                          {/* {certificate.map((certificate) => {
-                          return <div key={certificate.id}>{certificate.Logged_At}</div>
-                      })} */}
                         </CTableDataCell>
                         <CTableDataCell>
                           {certificate.Logged_At}
-                          {/* {certificate.map((certificate) => {
-                          return <div key={certificate.id}>{certificate.Not_Before}</div>
-                      })} */}
                           <div className="small text-medium-emphasis"></div>
                           <strong></strong>
                         </CTableDataCell>
                         <CTableDataCell>
                           {certificate.Not_Before}
-                          <div>
-                            {/* {certificate.map((certificate) => {
-                          return <div key={certificate.id}>{certificate.Not_After}</div>
-                        })} */}
-                          </div>
+                          <div></div>
                           <div className="small text-medium-emphasis"></div>
                         </CTableDataCell>
                         <CTableDataCell>
                           {certificate.Not_After}
-                          <tr>
-                            {/* {certificate.map((certificate) => {
-                          return <div key={certificate.id}>{certificate.serial_number}</div>
-                        })} */}
-                          </tr>
+                          <tr></tr>
                           <div className="small text-medium-emphasis"></div>
                         </CTableDataCell>
                         <CTableDataCell>
